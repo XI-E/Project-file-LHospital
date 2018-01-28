@@ -1,0 +1,127 @@
+/*
+* dashed | HAS-A
+* dotted | HAS-PTR-TO
+* Solid | IS-A
+*/
+digraph UI
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    graph [splines=ortho]
+
+    interface [shape = rectangle]
+    box [shape = rectangle]
+    coord [shape = rectangle]
+    list_layout [shape = rectangle]
+    manipulator [shape = rectangle]
+    line [shape = rectangle]
+    frame [shape = rectangle]
+    interactive [shape = rectangle]
+    button [shape = rectangle]
+    text_box [shape = rectangle]
+    list_layout_node [shape = rectangle]
+
+    interface -> box [style = dashed]
+    box -> {frame, line, coord, list_layout, manipulator} [style = dashed]
+    box -> {interactive, button} [style = dotted]
+    
+    text_box -> interactive [style = solid]
+    button -> interactive [style = solid]
+    interactive -> list_layout_node [style = solid]
+    list_layout_node -> list_layout_node [style = dotted]
+    list_layout_node -> coord [style = dashed]
+
+    list_layout -> list_layout_node [style = dotted]
+    list_layout -> coord [style = dashed]
+}
+
+digraph hosp
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    graph [splines=ortho]
+    phone [shape = rectangle]
+    Time [shape = rectangle]
+    Date [shape = rectangle]
+    address [shape = rectangle]
+    disease [shape = rectangle]
+    insurance [shape = rectangle]
+    medicine [shape = rectangle]
+    transaction [shape = rectangle]
+    person [shape = rectangle]
+    userid [shape = rectangle]
+    employee [shape = rectangle]
+    doctor [shape = rectangle]
+    nurse [shape = rectangle]
+    receptionist [shape = rectangle]
+    hospital [shape = rectangle]
+    patient [shape = rectangle]
+
+    insurance -> Date [style = dashed]
+    transaction -> {Date, Time} [style = dashed]
+    person -> {Date, address, Time} [style = dashed]
+
+    employee -> person [style = solid]
+    employee -> {Time, userid} [style = dashed]
+    doctor -> employee [style = solid]
+    nurse -> employee [style = solid]
+    receptionist -> employee [style = solid]
+
+    hospital -> {transaction, patient, medicine, Date} [style = dashed]
+
+    patient -> person [style = solid]
+    patient -> {disease, phone, insurance, Date} [style = dashed]
+}
+
+digraph key
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    label="Key";
+    labelloc = top;
+    
+    rankdir = LR
+
+    {
+        child [label = "A", shape = rectangle]
+        parent [label = "B", shape = rectangle]
+        child -> parent [style = solid] 
+        k1 [shape=plaintext, style=solid, label="\lA inherits from B\l", width=3.5]
+    }
+
+    {
+        container[label = "A", shape = rectangle]
+        element[label = "B", shape = rectangle]
+        container -> element [style = dashed]
+        k2[shape=plaintext, style=solid, label="A has an object of type B\l", width=3.5]
+    }
+
+    {
+        H[label = "A", shape = rectangle]
+        J[label = "B", shape = rectangle]
+        H -> J [style = dotted]
+        k3[shape=plaintext, style=solid, label="\lA has a pointer to an object of type B\l", width=3.5]
+    }
+
+    {rank = source; k3 k2 k1}
+
+}
+
+digraph main_flowchart
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    start[shape="box", style=rounded];
+    end[shape="box", style=rounded];
+
+    start -> clrscr -> log1 -> init -> log2 -> end
+
+    clrscr [shape="parallelogram", style="", label = "ui::clrscr()"]
+    log1 [shape="parallelogram", style="", label = "interface::log_this()"]
+    init [shape="parallelogram", style="", label = "interface::init()"]
+    log2 [shape="parallelogram", style="", label = "interface::log_this()"]
+}

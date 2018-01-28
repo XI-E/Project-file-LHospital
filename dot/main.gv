@@ -1,0 +1,15 @@
+digraph main_flowchart
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    start[shape="box", style=rounded];
+    end[shape="box", style=rounded];
+
+    start -> clrscr -> log1 -> init -> log2 -> end
+
+    clrscr [shape="parallelogram", style="", label = "ui::clrscr()"]
+    log1 [shape="parallelogram", style="", label = "interface::log_this()"]
+    init [shape="parallelogram", style="", label = "interface::init()"]
+    log2 [shape="parallelogram", style="", label = "interface::log_this()"]
+}

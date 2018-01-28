@@ -1,0 +1,92 @@
+digraph hosp
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    graph [splines=ortho, rankdir = LR]
+
+
+    subgraph entities
+    {
+        node[shape = rectangle, peripheries = 2]
+
+        person
+        userid
+        employee
+        doctor
+        nurse
+        receptionist
+        patient
+    }
+
+    subgraph relationships
+    {
+        node[fillcolor = lightgray, style = filled]
+
+        subgraph hasa
+        {
+            node[shape = diamond, label = "HAS A"]
+
+            hasa1
+        }
+
+        subgraph isa
+        {
+            node[shape = triangle, label = "IS A"]
+
+            isa1
+            isa2
+            isa25
+            isa3
+            isa4
+        }
+
+        subgraph attends
+        {
+            node[shape = house, label = "ATTENDS TO"]
+            
+            attends1
+            attends2
+        }
+    }
+
+    subgraph nodes
+    {
+        node[label = "id"]
+
+        id1
+        id2
+    }
+
+    person -> {name, age, sex, dob, address, phone_no}
+    userid -> {username, passcipher, default_key}
+
+    employee -> isa1 -> person
+    employee -> {id1, salary, shift start time, shift end time, account}
+    employee -> hasa1 -> userid
+
+    doctor -> isa2 -> employee
+    nurse -> isa25 -> employee
+
+    doctor -> {speciality, patients}
+    nurse -> {patients}
+
+    doctor -> attends1 -> patient
+    nurse -> attends2 -> patient
+    receptionist -> isa3 -> employee
+
+    patient -> isa4 -> person
+    patient -> {
+                    id2,
+                    disease,
+                    allergies,
+                    med,
+                    guardian_name,
+                    emergency_contact,
+                    insurance_info,
+                    admission_date,
+                    bill_amt,
+                    discharged,
+                    discharge_date
+               }
+}

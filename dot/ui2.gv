@@ -1,0 +1,90 @@
+digraph UI
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    graph[splines = ortho]
+
+
+    subgraph entities
+    {
+        node[shape = rectangle, peripheries = 2]
+
+        interface
+        box 
+        coord 
+        list_layout
+        manipulator 
+        line 
+        frame 
+        interactive 
+        button 
+        text_box 
+        list_layout_node 
+    }
+
+    subgraph relationships
+    {
+        node[fillcolor = lightgray, style = filled]
+
+        subgraph hasa
+        {
+            node[shape = diamond, label = "HAS A"]
+
+            hasa10
+            hasa1
+            hasa2
+        }
+
+        subgraph has_ptr
+        {
+            node[shape = oval, label = "HAS A POINTER TO"]
+
+            hp1
+            hp2
+            hp3
+            hp4
+        }
+
+        subgraph isa
+        {
+            node[shape = triangle, label = "IS A"]
+
+            isa1
+            isa2
+        }
+    }
+
+    interface -> hasa10 -> box
+    box -> hasa1 -> 
+    {frame, line, coord, list_layout, manipulator}
+    box -> hp1 -> {interactive, button}
+    {text_box, button} -> isa1 -> interactive
+    interactive -> isa2 -> list_layout_node
+    interactive -> hp4 -> interactive
+    list_layout_node -> hp2 -> list_layout_node
+    list_layout -> hp3 -> list_layout_node
+    {list_layout_node, list_layout} -> hasa2 -> coord
+
+
+    //Attributes//
+    box -> {height, width, header, footer}
+    width3[label = "width"]
+    line -> {width3}
+    height2[label = "height"]
+    width2[label = "width"]
+    frame -> {border_chars, height2, width2}
+
+    head[label = "*head"]
+    current[label = "*current"]
+    list_layout -> {head, current}
+
+    prev[label = "*prev"]
+    next[label = "*next"]
+    interactive -> {prev, next}
+    
+    next2[label = "*next"]
+    list_layout_node -> {next2, pos, str}
+    coord -> {x, y}
+    manipulator -> {own_index}
+}

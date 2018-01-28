@@ -1,0 +1,34 @@
+digraph key
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    label="Key";
+    labelloc = top;
+    
+    rankdir = LR
+
+    {
+        child [label = "A", shape = rectangle]
+        parent [label = "B", shape = rectangle]
+        child -> parent [style = solid] 
+        k1 [shape=plaintext, style=solid, label="\lA inherits from B\l", width=3.5]
+    }
+
+    {
+        container[label = "A", shape = rectangle]
+        element[label = "B", shape = rectangle]
+        container -> element [style = dashed]
+        k2[shape=plaintext, style=solid, label="A has an object of type B\l", width=3.5]
+    }
+
+    {
+        H[label = "A", shape = rectangle]
+        J[label = "B", shape = rectangle]
+        H -> J [style = dotted]
+        k3[shape=plaintext, style=solid, label="\lA has a pointer to an object of type B\l", width=3.5]
+    }
+
+    {rank = source; k3 k2 k1}
+
+}   

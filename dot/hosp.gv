@@ -1,0 +1,38 @@
+digraph hosp
+{
+    fontpath = "/Downloads/sf-florencesans/TrueType"
+    fontname = "SFFlorencesans.ttf"
+
+    graph [splines=ortho]
+    phone [shape = rectangle]
+    Time [shape = rectangle]
+    Date [shape = rectangle]
+    address [shape = rectangle]
+    disease [shape = rectangle]
+    insurance [shape = rectangle]
+    medicine [shape = rectangle]
+    transaction [shape = rectangle]
+    person [shape = rectangle]
+    userid [shape = rectangle]
+    employee [shape = rectangle]
+    doctor [shape = rectangle]
+    nurse [shape = rectangle]
+    receptionist [shape = rectangle]
+    hospital [shape = rectangle]
+    patient [shape = rectangle]
+
+    insurance -> Date [style = dashed]
+    transaction -> {Date, Time} [style = dashed]
+    person -> {Date, address, Time} [style = dashed]
+
+    employee -> person [style = solid]
+    employee -> {Time, userid} [style = dashed]
+    doctor -> employee [style = solid]
+    nurse -> employee [style = solid]
+    receptionist -> employee [style = solid]
+
+    hospital -> {transaction, patient, medicine, Date} [style = dashed]
+
+    patient -> person [style = solid]
+    patient -> {disease, phone, insurance, Date} [style = dashed]
+}

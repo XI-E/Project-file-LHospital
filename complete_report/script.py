@@ -58,5 +58,20 @@ a = ""
 for item in ss:
     a += item + ',%' + os.linesep
         
+ss = []
+for path, subdirs, files in os.walk('output2'):
+    for filename in files:
+        s = os.path.join(path, filename)
+        ss.append(str(s))
+        
+def mykey(a):
+    string = re.sub('[^0-9]', '', a)
+    num = int(string)
+    return num
+
+ss.sort(key = mykey)
+for item in ss:
+    a += item + ',%' + os.linesep
+        
 a = a[:-3] + '%' + os.linesep     
 f.write(a + '}%' + os.linesep)
